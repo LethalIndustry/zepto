@@ -33,10 +33,11 @@ $(document).on('deviceready',function(){
             navigator.notification.alert('Debe llenar el campo CURP',alertDismissed,'Error', 'Ok');
             return false;
         }else{
-            if(longitud!=1){
+            if(longitud!=18){
                 navigator.notification.alert('El campo CURP debe contener 18 caracteres',alertDismissed,'Error', 'Ok');
                 return false;
             }else{
+                localStorage.setItem("CURP", curp);
                 $.ajax({
                   url: "menu.html",
                   success: function(result) {
@@ -56,6 +57,15 @@ $(document).on('deviceready',function(){
       });
     });
 
+    $("#contenido").on("click", ".certificado" ,function(){
+      $.ajax({
+          url: "certificado.html", 
+          success: function(result) {
+                $("#contenido").html(result).trigger("create");
+          }
+      });
+    });
+
     $("#contenido").on("click", ".avisos" ,function(){
       $.ajax({
           url: "avisos.html", 
@@ -66,11 +76,15 @@ $(document).on('deviceready',function(){
                 textVisible: true,
                 theme: 'b'
               });
+              curp = localStorage.getItem("CURP");
+              //alert(curp);
+              //console.log(curp);
               $.ajax({
                   url : 'http://cpte.gob.mx/peie/app/data.php',
-                  type : 'POST',
+                  type : 'GET',
                   contentType: "application/json; charset=utf-8",
                   dataType : 'json',
+                  data: {curp: curp},
                   success : function(data, textStatus, jqxhr){ 
                   	if(data.length > 0){
 	                  	for (var x = 0; x < data.length; x++) {
@@ -92,7 +106,7 @@ $(document).on('deviceready',function(){
                   	}                               
                   },
                   error : function (jqxhr, textStatus, errorMessage){ 
-                      console.log(argument);              
+                      console.log(errorMessage);              
                   }               
               });
           }
