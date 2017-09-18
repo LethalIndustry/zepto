@@ -86,16 +86,21 @@ $(document).on('deviceready',function(){
                   dataType : 'json',
                   data: {curp: curp},
                   success : function(data, textStatus, jqxhr){ 
-                  	if(data.length > 0){
-	                  	for (var x = 0; x < data.length; x++) {
-	                        fecha = data[x].fecha;
-	                        aviso = data[x].aviso;
-	                        departamento = data[x].departamento;
+                    //alert(data);
+                    if(data!=null){
+                      if(data.length > 0){
+                        for (var x = 0; x < data.length; x++) {
+                            fecha = data[x].fecha;
+                            aviso = data[x].aviso;
+                            departamento = data[x].departamento;
 
-	                        $(".ui-content").append("<div class='contenedor'><div class='head'>"+fecha+"</div><div class='dentro'>"+aviso+"</div><div class='foo'>"+departamento+"</div>");
-	                    }   
-	                    $.mobile.loading('hide');	
-                  	}else{
+                            $(".ui-content").append("<div class='contenedor'><div class='head'>"+fecha+"</div><div class='dentro'>"+aviso+"</div><div class='foo'>"+departamento+"</div>");
+                        }   
+                        $.mobile.loading('hide'); 
+                      }
+                    }
+                  	else{
+                      $.mobile.loading('hide'); 
                   		navigator.notification.alert('No hay avisos nuevos para mostrar',alertDismissed,'Aviso', 'Ok');
                   		$.ajax({
 			                url: "menu.html",
