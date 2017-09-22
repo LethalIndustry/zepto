@@ -125,7 +125,7 @@ body {
     width:100%;
 }
 
-.btnEnviar{
+.btnEnviar,.btnEnviar2{
     background: #07714B;
     width: 100px;
     left:50%;
