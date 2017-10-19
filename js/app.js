@@ -225,8 +225,8 @@ $(document).on('deviceready',function(){
                 theme: 'b'
               });
               curp = localStorage.getItem("CURP");
-              alert(curp);
-              console.log(curp);
+              //alert(curp);
+              //console.log(curp);
               $.ajax({
                   url : 'http://cpte.gob.mx/peie/app/data.php',
                   type : 'GET',
@@ -234,8 +234,8 @@ $(document).on('deviceready',function(){
                   dataType : 'json',
                   data: {curp: curp},
                   success : function(data, textStatus, jqxhr){ 
-                    alert(data);
-                    console.log(data);
+                    //alert(data);
+                    //console.log(data);
                     if(data!=null){
                       if(data.length > 0){
                         for (var x = 0; x < data.length; x++) {
