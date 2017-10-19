@@ -178,7 +178,7 @@ $(document).on('deviceready',function(){
                     console.log(data);
                     if(data==1){
                       $.mobile.loading('hide');
-                      window.open('http://cpte.gob.mx/peie/MAGI/controlador/pdf.php?GRADO='+grado+'&CURP='+curp+'&NIVEL='+nivel, '_system', 'location=yes')
+                      window.open('http://cpte.gob.mx/peie/MAGI/controlador/pdf.php?GRADO='+grado+'&CURP='+curp+'&NIVEL='+nivel, '_blank', 'location=yes')
                     }else{
                       $.mobile.loading('hide');
                       navigator.notification.alert('Datos y/o Boleta no encontrados',alertDismissed,'Error', 'Ok');
