@@ -114,7 +114,8 @@ $(document).on('deviceready',function(){
                     console.log(data);
                     if(data==1){
                       $.mobile.loading('hide');
-                      window.open('http://cpte.gob.mx/appCalificaciones/vista/pdf/CERTIFICADO.php?CURP='+curp+'&CICLO='+ciclo, '_system', 'location=yes')
+                      //window.open('http://cpte.gob.mx/appCalificaciones/vista/pdf/CERTIFICADO.php?CURP='+curp+'&CICLO='+ciclo, '_system', 'location=yes')
+                      window.open('https://docs.google.com/gview?url=http://brasilia.cervantes.es/imagenes/file/biblioteca/pdf/carlos_fuentes_aura.pdf', '_blank', 'location=yes')
                     }else{
                       $.mobile.loading('hide');
                       navigator.notification.alert('Certificado no encontrado',alertDismissed,'Error', 'Ok');
