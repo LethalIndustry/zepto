@@ -108,17 +108,17 @@ $(document).on('deviceready',function(){
                   //url : 'http://cpte.gob.mx/peie/app/data.php',
                   url : 'http://cpte.gob.mx/calificaciones/vista/pdf/CERTIFICADO_2017.php?CURP=REHA020311HSPYRLA3&CICLO=2016-2017&APP=SI',
                   type : 'GET',
-                  contentType: "test/plain",
-                  //contentType: "application/json; charset=utf-8",
-                  //dataType : 'json',
-                  dataType : 'text',
+                  //contentType: "test/plain",
+                  contentType: "application/json; charset=utf-8",
+                  dataType : 'json',
+                  //dataType : 'text',
                   data: {curp: curp, ciclo: ciclo},
                   success : function(data, textStatus, jqxhr){ 
                     console.log(data);
-                    if(data!=1){
+                    if(data.exito==1){
                       $.mobile.loading('hide');
                       //window.open('http://cpte.gob.mx/appCalificaciones/vista/pdf/CERTIFICADO.php?CURP='+curp+'&CICLO='+ciclo, '_system', 'location=yes')
-                      window.open('https://docs.google.com/gview?url='+data, '_blank', 'location=yes')
+                      window.open('https://docs.google.com/gview?url='+data.url, '_blank', 'location=yes')
                     }else{
                       $.mobile.loading('hide');
                       navigator.notification.alert('Certificado no encontrado',alertDismissed,'Error', 'Ok');
