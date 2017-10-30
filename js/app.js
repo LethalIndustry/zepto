@@ -106,7 +106,7 @@ $(document).on('deviceready',function(){
                 });
                 $.ajax({
                   //url : 'http://cpte.gob.mx/peie/app/data.php',
-                  url : 'http://cpte.gob.mx/calificaciones/vista/pdf/CERTIFICADO_2017.php?CURP=REHA020311HSPYRLA3&CICLO=2016-2017&APP=SI',
+                  url : 'http://cpte.gob.mx/calificaciones/vista/pdf/CERTIFICADO_2017.php?CURP='+curp+'&CICLO='+ciclo+'&APP=SI',
                   type : 'GET',
                   //contentType: "test/plain",
                   contentType: "application/json; charset=utf-8",
