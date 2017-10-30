@@ -115,7 +115,7 @@ $(document).on('deviceready',function(){
                   data: {curp: curp, ciclo: ciclo},
                   success : function(data, textStatus, jqxhr){ 
                     console.log(data);
-                    if(data==1){
+                    if(data!=1){
                       $.mobile.loading('hide');
                       //window.open('http://cpte.gob.mx/appCalificaciones/vista/pdf/CERTIFICADO.php?CURP='+curp+'&CICLO='+ciclo, '_system', 'location=yes')
                       window.open('https://docs.google.com/gview?url='+data, '_blank', 'location=yes')
