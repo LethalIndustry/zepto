@@ -114,6 +114,7 @@ $(document).on('deviceready',function(){
                   //dataType : 'text',
                   data: {curp: curp, ciclo: ciclo},
                   success : function(data, textStatus, jqxhr){ 
+                    console.log('http://cpte.gob.mx/calificaciones/vista/pdf/CERTIFICADO_2017.php?CURP='+curp+'&CICLO='+ciclo+'&APP=SI');
                     console.log(data);
                     if(data.exito==1){
                       $.mobile.loading('hide');
