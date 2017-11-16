@@ -141,7 +141,7 @@ $(document).on('deviceready',function(){
 		                      window.open('https://docs.google.com/gview?url='+data.url, '_blank', 'location=yes')
 		                    }else{
 		                      $.mobile.loading('hide');
-		                      navigator.notification.alert('Certificado no encontrado',alertDismissed,'Error', 'Ok');
+		                      navigator.notification.alert('Boleta no encontrada',alertDismissed,'Error', 'Ok');
 		                    }                              
 		                  },
 		                  error : function (jqxhr, textStatus, errorMessage){ 
