@@ -120,32 +120,36 @@ $(document).on('deviceready',function(){
                       $.mobile.loading('hide');
                       //window.open('http://cpte.gob.mx/appCalificaciones/vista/pdf/CERTIFICADO.php?CURP='+curp+'&CICLO='+ciclo, '_system', 'location=yes')
                       window.open('https://docs.google.com/gview?url='+data.url, '_blank', 'location=yes')
-                    }else{
-                      $.mobile.loading('hide');
-                      navigator.notification.alert('Certificado no encontrado',alertDismissed,'Error', 'Ok');
-                    }
-                    /*if(data!=null){
-                      if(data.length > 0){
-                        for (var x = 0; x < data.length; x++) {
-                            fecha = data[x].fecha;
-                            aviso = data[x].aviso;
-                            departamento = data[x].departamento;
-
-                            $(".ui-content").append("<div class='contenedor'><div class='head'>"+fecha+"</div><div class='dentro'>"+aviso+"</div><div class='foo'>"+departamento+"</div>");
-                        }   
-                        $.mobile.loading('hide'); 
-                      }
-                    }*/
-                    /*else{
-                      $.mobile.loading('hide'); 
-                      navigator.notification.alert('No hay avisos nuevos para mostrar',alertDismissed,'Aviso', 'Ok');
-                      $.ajax({
-                          url: "menu.html",
-                          success: function(result) {
-                              $("#contenido").html(result).trigger("create");
-                          }
-                      });
-                    }*/                               
+                    }else{ 
+                    											/*CONSULTA EN EL SEER*/
+                      /*$.mobile.loading('hide');
+                      navigator.notification.alert('Certificado no encontrado',alertDismissed,'Error', 'Ok');*/
+                      $.ajax({		                  
+		                  url : 'https://seer.gob.mx/peie/alumnos/consulta_certificado.php?curp='+curp+'&ciclo='+ciclo+'&APP=SI',
+		                  type : 'GET',
+		                  //contentType: "test/plain",
+		                  contentType: "application/json; charset=utf-8",
+		                  dataType : 'json',
+		                  //dataType : 'text',
+		                  data: {curp: curp, ciclo: ciclo},
+		                  success : function(data, textStatus, jqxhr){ 
+		                    console.log('https://seer.gob.mx/peie/alumnos/consulta_certificado.php?curp='+curp+'&ciclo='+ciclo+'&APP=SI');
+		                    console.log(data);
+		                    if(data.exito==1){
+		                      $.mobile.loading('hide');
+		                      //window.open('http://cpte.gob.mx/appCalificaciones/vista/pdf/CERTIFICADO.php?CURP='+curp+'&CICLO='+ciclo, '_system', 'location=yes')
+		                      window.open('https://docs.google.com/gview?url='+data.url, '_blank', 'location=yes')
+		                    }else{
+		                      $.mobile.loading('hide');
+		                      navigator.notification.alert('Certificado no encontrado',alertDismissed,'Error', 'Ok');
+		                    }                              
+		                  },
+		                  error : function (jqxhr, textStatus, errorMessage){ 
+		                  	  console.log('https://seer.gob.mx/peie/alumnos/consulta_certificado.php?curp='+curp+'&ciclo='+ciclo+'&APP=SI');
+		                      console.log(errorMessage);              
+		                  }               
+		              });
+                    }                              
                   },
                   error : function (jqxhr, textStatus, errorMessage){ 
                       console.log(errorMessage);              
@@ -185,31 +189,35 @@ $(document).on('deviceready',function(){
                       $.mobile.loading('hide');
                       window.open('http://cpte.gob.mx/peie/MAGI/controlador/pdf.php?GRADO='+grado+'&CURP='+curp+'&NIVEL='+nivel, '_system', 'location=yes')
                     }else{
-                      $.mobile.loading('hide');
-                      navigator.notification.alert('Datos y/o Boleta no encontrados',alertDismissed,'Error', 'Ok');
-                    }
-                    /*if(data!=null){
-                      if(data.length > 0){
-                        for (var x = 0; x < data.length; x++) {
-                            fecha = data[x].fecha;
-                            aviso = data[x].aviso;
-                            departamento = data[x].departamento;
-
-                            $(".ui-content").append("<div class='contenedor'><div class='head'>"+fecha+"</div><div class='dentro'>"+aviso+"</div><div class='foo'>"+departamento+"</div>");
-                        }   
-                        $.mobile.loading('hide'); 
-                      }
-                    }*/
-                    /*else{
-                      $.mobile.loading('hide'); 
-                      navigator.notification.alert('No hay avisos nuevos para mostrar',alertDismissed,'Aviso', 'Ok');
-                      $.ajax({
-                          url: "menu.html",
-                          success: function(result) {
-                              $("#contenido").html(result).trigger("create");
-                          }
-                      });
-                    }*/                               
+                    											/*CONSULTA AL SEER*/
+                      /*$.mobile.loading('hide');
+                      navigator.notification.alert('Datos y/o Boleta no encontrados',alertDismissed,'Error', 'Ok');*/
+                      $.ajax({       
+		                  url : 'https://seer.gob.mx/peie/alumnos/consulta_padres_2.php?curp='+curp+'&nivel='+nivel+'&grado='+grado+'&APP=SI',
+		                  type : 'GET',
+		                  //contentType: "test/plain",
+		                  contentType: "application/json; charset=utf-8",
+		                  dataType : 'json',
+		                  //dataType : 'text',
+		                  data: {seer:'1'},
+		                  success : function(data, textStatus, jqxhr){ 
+		                    console.log('https://seer.gob.mx/peie/alumnos/consulta_padres_2.php?curp='+curp+'&nivel='+nivel+'&grado='+grado+'&APP=SI');
+		                    console.log(data);
+		                    if(data.exito==1){
+		                      $.mobile.loading('hide');
+		                      //window.open('http://cpte.gob.mx/appCalificaciones/vista/pdf/CERTIFICADO.php?CURP='+curp+'&CICLO='+ciclo, '_system', 'location=yes')
+		                      window.open('https://docs.google.com/gview?url='+data.url, '_blank', 'location=yes')
+		                    }else{
+		                      $.mobile.loading('hide');
+		                      navigator.notification.alert('Certificado no encontrado',alertDismissed,'Error', 'Ok');
+		                    }                              
+		                  },
+		                  error : function (jqxhr, textStatus, errorMessage){ 
+		                  	  console.log('https://seer.gob.mx/peie/alumnos/consulta_certificado.php?curp='+curp+'&ciclo='+ciclo+'&APP=SI');
+		                      console.log(errorMessage);              
+		                  }               
+		              });                 
+                    }                              
                   },
                   error : function (jqxhr, textStatus, errorMessage){ 
                       console.log(errorMessage);              
