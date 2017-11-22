@@ -80,7 +80,7 @@ $(document).on('deviceready',function(){
 
     $("#contenido").on("change", "#cmbNivel" ,function(){
     	nivel = $(this).val();
-    	if(nivel=="SECUNDARIA"){
+    	if(nivel=="3"){
     		$("#cmbGrado").html("<option value='1'>1</option><option value='2'>2</option><option value='3'>3</option>");
     	}else{
     		$("#cmbGrado").html("<option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option>");
@@ -141,7 +141,7 @@ $(document).on('deviceready',function(){
 		                      window.open('https://docs.google.com/gview?url='+data.url, '_blank', 'location=yes')
 		                    }else{
 		                      $.mobile.loading('hide');
-		                      navigator.notification.alert('Boleta no encontrada',alertDismissed,'Error', 'Ok');
+		                      navigator.notification.alert('Certificado no encontrado',alertDismissed,'Error', 'Ok');
 		                    }                              
 		                  },
 		                  error : function (jqxhr, textStatus, errorMessage){ 
@@ -186,14 +186,37 @@ $(document).on('deviceready',function(){
                   success : function(data, textStatus, jqxhr){ 
                     console.log(data);
                     if(data==1){
-                      $.mobile.loading('hide');
-                      window.open('http://cpte.gob.mx/peie/MAGI/controlador/pdf.php?GRADO='+grado+'&CURP='+curp+'&NIVEL='+nivel, '_system', 'location=yes')
+                    	$.ajax({       
+			                  url : 'http://cpte.gob.mx/peie/MAGI/controlador/pdf.php?GRADO='+grado+'&CURP='+curp+'&NIVEL='+nivel+'&APP=SI',
+			                  type : 'GET',
+			                  contentType: "application/json; charset=utf-8",
+			                  dataType : 'json',
+			                  data: {cpte:'1'},
+			                  success : function(data, textStatus, jqxhr){ 
+			                    console.log('http://cpte.gob.mx/peie/MAGI/controlador/pdf.php?GRADO='+grado+'&CURP='+curp+'&NIVEL='+nivel+'&APP=SI');
+			                    console.log(data);
+			                    if(data.exito==1){
+			                      $.mobile.loading('hide');
+			                      //window.open('http://cpte.gob.mx/appCalificaciones/vista/pdf/CERTIFICADO.php?CURP='+curp+'&CICLO='+ciclo, '_system', 'location=yes')
+			                      window.open('https://docs.google.com/gview?url='+data.url, '_blank', 'location=yes')
+			                    }/*else{
+			                      $.mobile.loading('hide');
+			                      navigator.notification.alert('Boleta no encontrada',alertDismissed,'Error', 'Ok');
+			                    }  */                            
+			                  },
+			                  error : function (jqxhr, textStatus, errorMessage){ 
+			                  	  console.log('http://cpte.gob.mx/peie/MAGI/controlador/pdf.php?GRADO='+grado+'&CURP='+curp+'&NIVEL='+nivel+'&APP=SI');
+			                      console.log(errorMessage);              
+			                  }               
+			              });
+                      //$.mobile.loading('hide');
+                      //window.open('http://cpte.gob.mx/peie/MAGI/controlador/pdf.php?GRADO='+grado+'&CURP='+curp+'&NIVEL='+nivel, '_system', 'location=yes')
                     }else{
                     											/*CONSULTA AL SEER*/
                       /*$.mobile.loading('hide');
                       navigator.notification.alert('Datos y/o Boleta no encontrados',alertDismissed,'Error', 'Ok');*/
                       $.ajax({       
-		                  url : 'https://seer.gob.mx/peie/alumnos/consulta_padres_2.php?curp='+curp+'&nivel='+nivel+'&grado='+grado+'&APP=SI',
+		                  url : 'https://seer.gob.mx/peie/alumnos/consulta_padres_2.php?curp='+curp+'&NIVEL='+nivel+'&GRADO='+grado+'&APP=SI',
 		                  type : 'GET',
 		                  //contentType: "test/plain",
 		                  contentType: "application/json; charset=utf-8",
@@ -201,7 +224,7 @@ $(document).on('deviceready',function(){
 		                  //dataType : 'text',
 		                  data: {seer:'1'},
 		                  success : function(data, textStatus, jqxhr){ 
-		                    console.log('https://seer.gob.mx/peie/alumnos/consulta_padres_2.php?curp='+curp+'&nivel='+nivel+'&grado='+grado+'&APP=SI');
+		                    console.log('https://seer.gob.mx/peie/alumnos/consulta_padres_2.php?curp='+curp+'&NIVEL='+nivel+'&GRADO='+grado+'&APP=SI');
 		                    console.log(data);
 		                    if(data.exito==1){
 		                      $.mobile.loading('hide');
@@ -209,11 +232,11 @@ $(document).on('deviceready',function(){
 		                      window.open('https://docs.google.com/gview?url='+data.url, '_blank', 'location=yes')
 		                    }else{
 		                      $.mobile.loading('hide');
-		                      navigator.notification.alert('Certificado no encontrado',alertDismissed,'Error', 'Ok');
+		                      navigator.notification.alert('Boleta no encontrada',alertDismissed,'Error', 'Ok');
 		                    }                              
 		                  },
 		                  error : function (jqxhr, textStatus, errorMessage){ 
-		                  	  console.log('https://seer.gob.mx/peie/alumnos/consulta_certificado.php?curp='+curp+'&ciclo='+ciclo+'&APP=SI');
+		                  	  console.log('https://seer.gob.mx/peie/alumnos/consulta_padres_2.php?curp='+curp+'&NIVEL='+nivel+'&GRADO='+grado+'&APP=SI');
 		                      console.log(errorMessage);              
 		                  }               
 		              });                 
